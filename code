@@ -1,0 +1,32 @@
+# coding: utf-8
+from flask import Flask
+from flask import url_for
+
+app = Flask(__name__)
+
+
+@app.route('/')
+@app.route('/index1')
+def index1():
+    return "Миссия Колонизация Марса"
+
+@app.route('/index')
+def index():
+    return 'И на Марсе будут яблони цвести!'
+
+@app.route('/image_mars')
+def image():
+    return """<!doctype html>
+                <html lang="en">
+                  <head>
+                    <meta charset="utf-8">
+                    <title>Привет, Яндекс!</title>
+                  </head>
+                  <body>
+                    <h1>Жди нас, Марс!</h1>
+                  </body>
+                </html>""" + f'''<img src="{url_for('static', filename='mars.jpg')}" 
+           alt="здесь должна была быть картинка, но не нашлась">'''
+
+if __name__ == '__main__':
+    app.run(port=8080, host='127.0.0.1')
